@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Exo_2, JetBrains_Mono } from "next/font/google";
 import { I18nProvider } from "@/i18n";
 import { getSeoContent, getSiteUrl, SITE_NAME } from "@/lib/seo";
+import { AnalyticsProvider } from "@/shared/components/AnalyticsProvider";
 import { SeoJsonLd } from "@/shared/components/SeoJsonLd";
 import "./globals.css";
 
@@ -97,7 +98,9 @@ export default function RootLayout({
         className={`${exo2.variable} ${jetbrainsMono.variable} antialiased`}
         style={{ ["--page-bg" as string]: pageBg }}
       >
-        <I18nProvider>{children}</I18nProvider>
+        <AnalyticsProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </AnalyticsProvider>
       </body>
     </html>
   );

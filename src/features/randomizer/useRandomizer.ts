@@ -12,6 +12,14 @@ import {
   type Weapon,
 } from "@/domain";
 import type { CategoryFilterState } from "@/features/filters/categoryFilters";
+import {
+  buildFilterSummary,
+  trackFilterChange,
+  trackSpin,
+  trackSpinBlocked,
+  trackSpinComplete,
+  trackWeaponExcluded,
+} from "@/lib/analytics";
 import { buildFilterKey } from "./filterKey";
 import {
   INITIAL_RANDOMIZER_SETTINGS,
@@ -117,14 +125,50 @@ export function useRandomizer() {
     setSpinning(false);
   }, [filterKey]);
 
+  useEffect(() => {
+    if (!settingsReady) return;
+
+    const summary = buildFilterSummary({
+      teamFilter,
+      filteredWeapons,
+      budget,
+      armor,
+      excludedIds,
+      categoryFilters,
+    });
+
+    trackFilterChange(summary);
+
+    if (summary.poolSize === 0) {
+      trackSpinBlocked(summary, "empty_pool");
+    }
+  }, [settingsReady, filterKey, teamFilter, filteredWeapons, budget, armor, excludedIds, categoryFilters]);
+
   const canSpin = filteredWeapons.length > 0 && !spinning;
 
+  function getSummary() {
+    return buildFilterSummary({
+      teamFilter,
+      filteredWeapons,
+      budget,
+      armor,
+      excludedIds,
+      categoryFilters,
+    });
+  }
+
   function handleSpin() {
-    if (!canSpin) return;
+    const summary = getSummary();
+
+    if (!canSpin) {
+      trackSpinBlocked(summary, summary.poolSize === 0 ? "empty_pool" : "spinning");
+      return;
+    }
 
     const result = spinWeapon(filteredWeapons);
     if (!result) return;
 
+    trackSpin(summary);
     setWinner(result);
     setSpinId((id) => id + 1);
     setSpinning(true);
@@ -133,11 +177,20 @@ export function useRandomizer() {
   function handleToggleExclusion(weaponId: string) {
     setExcludedIds((current) => {
       const next = new Set(current);
-      if (next.has(weaponId)) {
+      const wasExcluded = next.has(weaponId);
+
+      if (wasExcluded) {
         next.delete(weaponId);
       } else {
         next.add(weaponId);
       }
+
+      trackWeaponExcluded({
+        weaponId,
+        excludedCount: next.size,
+        action: wasExcluded ? "include" : "exclude",
+      });
+
       return next;
     });
   }
@@ -168,6 +221,11 @@ export function useRandomizer() {
     handleSpin,
     handleToggleExclusion,
     handleClearExclusions,
-    handleSpinComplete: () => setSpinning(false),
+    handleSpinComplete: () => {
+      setSpinning(false);
+      if (winner) {
+        trackSpinComplete(getSummary(), winner);
+      }
+    },
   };
 }

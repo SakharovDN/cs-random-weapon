@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { LOCALE_DEFINITIONS, type Locale, useLocaleSwitcher } from "@/i18n";
+import { trackLocaleChange } from "@/lib/analytics";
 
 export function LanguageSwitcher() {
   const { locale, setLocale } = useLocaleSwitcher();
@@ -16,7 +17,13 @@ export function LanguageSwitcher() {
         id="language-select"
         value={locale}
         aria-label={t("select")}
-        onChange={(event) => setLocale(event.target.value as Locale)}
+        onChange={(event) => {
+          const nextLocale = event.target.value as Locale;
+          if (nextLocale !== locale) {
+            trackLocaleChange(nextLocale, locale);
+          }
+          setLocale(nextLocale);
+        }}
         className={[
           "w-full cursor-pointer appearance-none rounded-lg border border-slate-700 bg-slate-900/80",
           "py-2 pl-3 pr-9 text-sm font-semibold uppercase tracking-wide text-slate-200",
