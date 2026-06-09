@@ -26,8 +26,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  const pageBg = `url('${basePath}/bg/inferno-background.jpg')`;
+  const pageBg = "url('/bg/inferno-background.jpg')";
 
   return (
     <html lang="en" suppressHydrationWarning>
