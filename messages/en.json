@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "title": "CS2 Random Weapon",
+    "description": "Random Counter-Strike 2 weapon picker with filters and round budget"
+  },
+  "app": {
+    "game": "Counter-Strike 2",
+    "title": "Random Weapon"
+  },
+  "language": {
+    "label": "Language",
+    "select": "Select language"
+  },
+  "filters": {
+    "title": "Filters",
+    "team": "Team",
+    "categories": "Categories",
+    "excludeCategories": "Exclude categories",
+    "roundBudget": "Round budget",
+    "equipment": "Equipment",
+    "leftForWeapons": "{amount} left for weapons",
+    "armorCost": "(armor {amount})"
+  },
+  "teams": {
+    "all": "All",
+    "ct": "CT",
+    "t": "T"
+  },
+  "categories": {
+    "all": "All",
+    "pistol": "Pistols",
+    "smg": "SMGs",
+    "shotgun": "Shotguns",
+    "sniper": "Sniper Rifles",
+    "rifle": "Rifles",
+    "lmg": "Machine Guns"
+  },
+  "armor": {
+    "none": "No vest",
+    "kevlar": "Kevlar Vest",
+    "kevlar_helmet": "Kevlar Vest + Helmet"
+  },
+  "exclusions": {
+    "title": "Exclusions",
+    "reset": "Reset ({count})",
+    "includeInPool": "Include in pool",
+    "excludeFromPool": "Exclude from pool"
+  },
+  "slot": {
+    "title": "Slot",
+    "result": "Result",
+    "noWeapons": "No weapons available",
+    "weaponsInPool": "{count, plural, one {# weapon in pool} other {# weapons in pool}}"
+  },
+  "spin": {
+    "spin": "Spin",
+    "spinning": "Spinning...",
+    "spinningShort": "...",
+    "inPool": "In pool:",
+    "forWeapons": "for weapons",
+    "fromBudget": "(from {budget}, armor {armor})",
+    "excludedWeapons": "−{count} weapons",
+    "excludedCategories": "−{count} categories",
+    "emptyPool": "No weapons match current filters."
+  }
+}

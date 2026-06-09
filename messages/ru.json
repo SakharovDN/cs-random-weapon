@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "title": "CS2 Random Weapon",
+    "description": "Случайный выбор оружия Counter-Strike 2 с фильтрами и бюджетом раунда"
+  },
+  "app": {
+    "game": "Counter-Strike 2",
+    "title": "Random Weapon"
+  },
+  "language": {
+    "label": "Язык",
+    "select": "Выберите язык"
+  },
+  "filters": {
+    "title": "Фильтры",
+    "team": "Команда",
+    "categories": "Категории",
+    "excludeCategories": "Исключить категории",
+    "roundBudget": "Бюджет раунда",
+    "equipment": "Снаряжение",
+    "leftForWeapons": "На оружие остаётся {amount}",
+    "armorCost": "(броня {amount})"
+  },
+  "teams": {
+    "all": "Все",
+    "ct": "CT",
+    "t": "T"
+  },
+  "categories": {
+    "all": "Все",
+    "pistol": "Пистолеты",
+    "smg": "Пистолеты-пулемёты",
+    "shotgun": "Дробовики",
+    "sniper": "Снайперские винтовки",
+    "rifle": "Винтовки",
+    "lmg": "Пулемёты"
+  },
+  "armor": {
+    "none": "Без брони",
+    "kevlar": "Бронежилет",
+    "kevlar_helmet": "Бронежилет + шлем"
+  },
+  "exclusions": {
+    "title": "Исключения",
+    "reset": "Сброс ({count})",
+    "includeInPool": "Вернуть в пул",
+    "excludeFromPool": "Исключить из пула"
+  },
+  "slot": {
+    "title": "Слот",
+    "result": "Выпало",
+    "noWeapons": "Нет доступного оружия",
+    "weaponsInPool": "{count, plural, one {# оружие в пуле} few {# оружия в пуле} many {# оружий в пуле} other {# оружий в пуле}}"
+  },
+  "spin": {
+    "spin": "Крутить",
+    "spinning": "Крутится...",
+    "spinningShort": "...",
+    "inPool": "В пуле:",
+    "forWeapons": "на оружие",
+    "fromBudget": "(из {budget}, броня {armor})",
+    "excludedWeapons": "−{count} оруж.",
+    "excludedCategories": "−{count} кат.",
+    "emptyPool": "Нет оружия по текущим настройкам."
+  }
+}
