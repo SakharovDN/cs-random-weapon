@@ -10,6 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { applyClientSeo } from "@/lib/seo";
 import { DEFAULT_LOCALE, type Locale } from "./config";
 import { MESSAGES } from "./messages";
 import { loadStoredLocale, saveLocale } from "./storage";
@@ -37,15 +38,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!ready) return;
-
-    const messages = MESSAGES[locale];
-    document.documentElement.lang = locale;
-    document.title = messages.meta.title;
-
-    const description = document.querySelector('meta[name="description"]');
-    if (description) {
-      description.setAttribute("content", messages.meta.description);
-    }
+    applyClientSeo(locale);
   }, [locale, ready]);
 
   const localeContext = useMemo(
